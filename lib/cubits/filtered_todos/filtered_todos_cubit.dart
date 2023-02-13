@@ -25,11 +25,15 @@ class FilteredTodosCubit extends Cubit<FilteredTodosState> {
   late final StreamSubscription todoListSubscription;
   late final StreamSubscription todoSearchSubscription;
 
+  //lista iniziale
+  final List<Todo> initialTodoList;
+
   FilteredTodosCubit({
+    required this.initialTodoList,
     required this.todoListCubit,
     required this.todoFilterCubit,
     required this.todoSearchCubit,
-  }) : super(FilteredTodosState.initial()) {
+  }) : super(FilteredTodosState(filteredTodos: initialTodoList)) {
     todoListSubscription =
         todoListCubit.stream.listen((TodoListState todoListState) {
       //*eseguito ogni volta che la lista cambia
